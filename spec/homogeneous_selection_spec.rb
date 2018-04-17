@@ -224,8 +224,8 @@ RSpec.describe HomogeneousSelection do
       expect(homogeneous_selection.source).to eq source
     end
 
-    it 'is set to token as unique_key by default' do
-      expect(homogeneous_selection.options[:unique_key]).to eq :token
+    it 'is set to token as map_key by default' do
+      expect(homogeneous_selection.options[:map_key]).to eq :token
     end
 
     context 'when given a hash with values that are not arrays of hashes' do

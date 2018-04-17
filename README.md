@@ -34,7 +34,7 @@ source = {
 }
  =>  {:logs=>[{:url=>"example.com", :token=>"345048", :thumbnail=>"example.com", :title=>"Lorem Ipsum"}], :content=>[], :myad=>[]}
 
-# Optionally, id to return in array, by default returns the 'token' property
+# Optionally, pass options[:map_key] to map by that key in returned array, by default returns the 'token' property
 selection = HomogeneousSelection.new(source)
  => #<HomogeneousSelection:0x0055a0e3b100b0 @source={:logs=>[{:url=>"example.com", :token=>"345048", :thumbnail=>"example.com", :title=>"Lorem Ipsum"}], :content=>[], :myad=>[]}, @options={:unique_key=>:token}>
 

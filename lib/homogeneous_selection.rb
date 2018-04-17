@@ -4,7 +4,7 @@ require 'set'
 
 class HomogeneousSelection
   DEFAULTS = {
-    unique_key: :token # Deafult hash key used for uniqueness
+    map_key: :token # Deafult hash key used for uniqueness
   }
 
   attr_accessor :options, :source
@@ -32,7 +32,7 @@ class HomogeneousSelection
       end
     end
 
-    selection.to_a.map { |selection_item| selection_item[options[:unique_key]].to_i }
+    selection.to_a.map { |selection_item| selection_item[options[:map_key]].to_i }
   end
 
 private
@@ -42,8 +42,8 @@ private
     source.all? do |key, value|
       value_is_an_array = value.is_a?(Array)
       array_elements_are_hashes = value.all? do |element|
-        # Each element must be a hash with given unique key
-        element.is_a?(Hash) && !element[options[:unique_key]].nil?
+        # Each element must be a hash with given map key
+        element.is_a?(Hash) && !element[options[:map_key]].nil?
       end
 
       value_is_an_array && array_elements_are_hashes
