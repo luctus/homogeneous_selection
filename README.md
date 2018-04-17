@@ -1,8 +1,5 @@
 # HomogeneousSelection
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/homogeneous_selection`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A small ruby gem exercise. Given a hash with any amount of strings as keys and arrays as values, and a 'x' required amount of items to select, returns an array with a homogeneous selection of x items, mapped by an unique key.
 
 ## Installation
 
@@ -22,7 +19,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+source = {
+  "logs": [
+    {
+      "url": "example.com",
+      "token": "345048",
+      "thumbnail": "example.com",
+      "title": "Lorem Ipsum"
+    }
+  ],
+  "content": [],
+  "myad": []
+}
+ =>  {:logs=>[{:url=>"example.com", :token=>"345048", :thumbnail=>"example.com", :title=>"Lorem Ipsum"}], :content=>[], :myad=>[]}
+
+# Optionally, id to return in array, by default returns the 'token' property
+selection = HomogeneousSelection.new(source)
+ => #<HomogeneousSelection:0x0055a0e3b100b0 @source={:logs=>[{:url=>"example.com", :token=>"345048", :thumbnail=>"example.com", :title=>"Lorem Ipsum"}], :content=>[], :myad=>[]}, @options={:unique_key=>:token}>
+
+# Optionally, pass the selection size to this method. Default is 4
+selection.get
+ => [345048]
+
+```
 
 ## Development
 
@@ -32,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/homogeneous_selection. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mlabarca/homogeneous_selection. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +60,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the HomogeneousSelection project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/homogeneous_selection/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the HomogeneousSelection project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/mlabarca/homogeneous_selection/blob/master/CODE_OF_CONDUCT.md).

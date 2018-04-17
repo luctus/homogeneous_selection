@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["mlabarca"]
   spec.email         = ["mauriciolabarca4tw@gmail.com"]
 
-  spec.summary       = %q{ A small ruby gem exercise that operates on a hash to produce an array }
+  spec.summary       = %q{ A small ruby gem exercise. Adds a Class that operates on a hash to produce an array from the nested values of that hash }
   spec.description   = %q{Given a hash with any amount of strings as keys and arrays as values, and a 'x' required amount of items to select, returns an array with a homogeneous selection of x items, mapped by an unique key }
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
