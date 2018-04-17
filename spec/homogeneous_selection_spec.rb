@@ -180,16 +180,48 @@ RSpec.describe HomogeneousSelection do
   }
 
 
+  let(:uniqueness_scenario) {
+    {
+      "content": [
+        {
+          "url": "//www.archdaily.com/103678/riva-del-garda-hospital-atenastudio",
+          "token": "103678",
+          "thumbnail": "//images.adsttc.com/media/images/55f6/f706/adbc/0139/a000/02ed/small_jpg/4-325.jpg?1442248427",
+          "title": "Re-Development of the Former Hospital/ the New Housing City / ATENASTUDIO + 3TI PROGETTI ITALIA + KREJ ENGINEERING"
+        }
+      ],
+      "logs": [
+        {
+          "url": "//www.archdaily.com/790952/vigneux-sur-seine-housing-margot-duclot-architectes-associes",
+          "token": "790952",
+          "thumbnail": "//images.adsttc.com/media/images/577e/4943/e58e/cea4/f500/0149/small_jpg/MDAA_VIGNEUX_HD-4%C2%A911h45.jpg?1467894052",
+          "title": "Vigneux-Sur-Seine Housing / Margot-Duclot architectes associ\u00e9s"
+        },
+        {
+          "url": "//www.archdaily.com/103678/riva-del-garda-hospital-atenastudio",
+          "token": "103678",
+          "thumbnail": "//images.adsttc.com/media/images/55f6/f706/adbc/0139/a000/02ed/small_jpg/4-325.jpg?1442248427",
+          "title": "Re-Development of the Former Hospital/ the New Housing City / ATENASTUDIO + 3TI PROGETTI ITALIA + KREJ ENGINEERING"
+        },
+        {
+          "url": "//www.archdaily.com/788138/60-social-housing-apartments-in-rive-de-gier-tectoniques-architects",
+          "token": "788138",
+          "thumbnail": "//images.adsttc.com/media/images/5743/f056/e58e/ce1e/dd00/00d9/small_jpg/RIVE_DE_GIER_1S2-5.jpg?1464070176",
+          "title": "60 Social Housing Apartments in Rive-De-Gier  / Tectoniques Architects"
+        }
+      ],
+      "myad": [
+      ]
+    }
+  }
+
+
   describe '#new' do
     let(:source) { scenario_1 }
     let(:homogeneous_selection) { HomogeneousSelection.new(source) }
 
     it 'assigns given hash object to a @source accessible variable' do
       expect(homogeneous_selection.source).to eq source
-    end
-
-    it 'is set to unique_selection true by default' do
-      expect(homogeneous_selection.options[:unique_selection]).to be true
     end
 
     it 'is set to token as unique_key by default' do
@@ -253,6 +285,15 @@ RSpec.describe HomogeneousSelection do
 
       it 'returns expected output' do
         expect(output).to eq [790952, 103678, 802358, 562873]
+      end
+    end
+
+    context 'when there are repeats in some of the data given' do
+      let(:source) { uniqueness_scenario }
+
+      it 'returns expected output without repeated tokens' do
+        expect(output.uniq).to eq output
+        expect(output).to eq [103678, 790952, 788138]
       end
     end
   end

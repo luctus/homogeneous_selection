@@ -1,9 +1,9 @@
 require "homogeneous_selection/version"
 require 'deep_clone'
+require 'set'
 
 class HomogeneousSelection
   DEFAULTS = {
-    unique_selection: true, # Avoid selecting 2 or more with same unique_key
     unique_key: :token # Deafult hash key used for uniqueness
   }
 
@@ -19,18 +19,20 @@ class HomogeneousSelection
     source_copy = DeepClone.clone source
 
     # Sets a second stop criteria when given a source smaller than selection amount
-    source_item_amount = source_copy.values.map(&:length).reduce(&:+)
-    selection = []
+    source_item_amount = source_copy.values.flatten.uniq.length
+    selection = Set.new []
 
     while selection.length < selection_amount && selection.length < source_item_amount
       source_copy.each do |key, element_array|
         break unless selection.length < selection_amount
+        next if element_array.empty?
+
         selection_item = source_copy[key].shift
-        selection.push(selection_item) unless selection_item.nil?
+        selection.add(selection_item) # Does not add repeats
       end
     end
 
-    selection.map { |selection_item| selection_item[options[:unique_key]].to_i }
+    selection.to_a.map { |selection_item| selection_item[options[:unique_key]].to_i }
   end
 
 private
