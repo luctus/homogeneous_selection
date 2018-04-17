@@ -1,4 +1,5 @@
 require "homogeneous_selection/version"
+require 'deep_clone'
 
 class HomogeneousSelection
   DEFAULTS = {
@@ -15,7 +16,21 @@ class HomogeneousSelection
   end
 
   def get(selection_amount = 4)
+    source_copy = DeepClone.clone source
 
+    # Sets a second stop criteria when given a source smaller than selection amount
+    source_item_amount = source_copy.values.map(&:length).reduce(&:+)
+    selection = []
+
+    while selection.length < selection_amount && selection.length < source_item_amount
+      source_copy.each do |key, element_array|
+        break unless selection.length < selection_amount
+        selection_item = source_copy[key].shift
+        selection.push(selection_item) unless selection_item.nil?
+      end
+    end
+
+    selection.map { |selection_item| selection_item[options[:unique_key]].to_i }
   end
 
 private
